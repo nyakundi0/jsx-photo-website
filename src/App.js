@@ -10,6 +10,7 @@ import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import OurWorks from './components/home/OurWorks';
 import ForgotPassword from './components/auth/ForgotPassword';
+import Dashboard from './components/dashboard/Dashboard';
 
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -27,6 +28,7 @@ const App = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/our-works" element={<OurWorks />} /> 
           <Route path="/forgotpassword" element={<ForgotPassword />} />
+          <Route path="/dashboard" element={<Dashboard />} /> 
         </Routes>
         <Footer />
       </div>
