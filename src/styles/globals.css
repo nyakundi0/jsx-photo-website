@@ -429,3 +429,75 @@ footer .icon:hover {
 #register a:hover {
   color: var(--secondary-color);
 }
+/* Main container styling */
+.our-works-container {
+  padding: 2rem;
+  background-color: #f7f7f7; /* Light background for the works section */
+}
+
+.our-works-container h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #333; /* Darker color for the title */
+}
+
+/* Gallery styling */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 1.5rem;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Responsive grid for different screen sizes */
+@media (min-width: 640px) {
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .gallery {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Individual work item styling */
+.work-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+  transition: transform 0.3s ease-in-out;
+}
+
+.work-item:hover {
+  transform: scale(1.05); /* Slight zoom effect on hover */
+}
+
+/* Styling for images */
+.work-item img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 10px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.work-item img:hover {
+  transform: scale(1.1); /* Zoom in on hover for images */
+}
+
+/* Styling for videos */
+.work-item video {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.work-item video:hover {
+  transform: scale(1.1); /* Zoom in on hover for videos */
+}
