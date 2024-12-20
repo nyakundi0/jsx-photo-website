@@ -8,7 +8,8 @@ import ContactForm from './components/shared/ContactForm';
 import Footer from './components/layout/Footer';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
-import OurWorks from './components/home/OurWorks';  // Import the OurWorks component
+import OurWorks from './components/home/OurWorks';
+import ForgotPassword from './components/auth/ForgotPassword';
 
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -24,7 +25,8 @@ const App = () => {
           <Route path="/contact" element={<ContactForm />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/our-works" element={<OurWorks />} /> {/* Add the OurWorks route */}
+          <Route path="/our-works" element={<OurWorks />} /> 
+          <Route path="/forgotpassword" element={<ForgotPassword />} />
         </Routes>
         <Footer />
       </div>
