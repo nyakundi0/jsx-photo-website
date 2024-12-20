@@ -1,6 +1,23 @@
-// src/components/layout/Navigation.jsx
 import React from 'react';
 import { Camera, Menu, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
+
+// Reusable navigation links component
+const NavLinks = () => {
+  const commonClasses = "text-gray-600 hover:text-purple-600 transition-colors";
+  const buttonClasses = "bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-2 rounded-full hover:opacity-90 transition-opacity";
+
+  return (
+    <>
+      <Link to="/" className={commonClasses}>Home</Link>
+      <Link to="/portfolio" className={commonClasses}>Portfolio</Link>
+      <Link to="/services" className={commonClasses}>Services</Link>
+      <Link to="/contact" className={buttonClasses}>Contact Us</Link>
+      <Link to="/login" className={commonClasses}>Login</Link>
+      <Link to="/register" className={commonClasses}>Register</Link>
+    </>
+  );
+};
 
 const Navigation = ({ isMenuOpen, setIsMenuOpen }) => {
   return (
@@ -14,30 +31,19 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen }) => {
             </span>
           </div>
 
-          <div className="hidden md:flex items-center gap-8">
-            <a href="#home" className="text-gray-600 hover:text-purple-600 transition-colors">Home</a>
-            <a href="#portfolio" className="text-gray-600 hover:text-purple-600 transition-colors">Portfolio</a>
-            <a href="#services" className="text-gray-600 hover:text-purple-600 transition-colors">Services</a>
-            <a href="#contact" className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-2 rounded-full hover:opacity-90 transition-opacity">
-              Contact Us
-            </a>
-          </div>
-
-          <button className="md:hidden text-gray-600" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          {/* Menu Button for Mobile */}
+          <button 
+            className="md:hidden text-gray-600" 
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
             {isMenuOpen ? <X /> : <Menu />}
           </button>
         </div>
 
-        {isMenuOpen && (
-          <div className="md:hidden py-4">
-            <div className="flex flex-col gap-4">
-              <a href="#home" className="text-gray-600 hover:text-purple-600 transition-colors px-4">Home</a>
-              <a href="#portfolio" className="text-gray-600 hover:text-purple-600 transition-colors px-4">Portfolio</a>
-              <a href="#services" className="text-gray-600 hover:text-purple-600 transition-colors px-4">Services</a>
-              <a href="#contact" className="text-gray-600 hover:text-purple-600 transition-colors px-4">Contact</a>
-            </div>
-          </div>
-        )}
+        {/* Navigation Links (hidden on mobile by default, shown when isMenuOpen is true) */}
+        <div className={`md:flex items-center gap-8 ${isMenuOpen ? 'block' : 'hidden'} md:block`}>
+          <NavLinks />
+        </div>
       </div>
     </nav>
   );

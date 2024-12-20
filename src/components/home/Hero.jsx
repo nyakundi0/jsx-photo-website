@@ -1,14 +1,17 @@
-// src/components/home/Hero.jsx
 import React from 'react';
 import { ChevronRight } from 'lucide-react';
+
+// Import the local image
+import HeroImage from '../../assets/images/hero_image.jpg'; // Adjust path based on your structure
 
 const Hero = () => {
   return (
     <section id="home" className="pt-20">
       <div className="relative h-screen flex items-center">
         <div className="absolute inset-0">
+          {/* Use the imported local image */}
           <img
-            src="/api/placeholder/1920/1080"
+            src={HeroImage} // Update to use the imported image
             alt="Hero"
             className="w-full h-full object-cover"
           />
