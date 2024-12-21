@@ -24,15 +24,15 @@ const Navigation = () => {
   return (
     <nav className="fixed w-full bg-white shadow-lg z-50">
       <div className="max-w-7xl mx-auto px-4 flex items-center justify-between h-20">
-        {/* Left Section: Logo and Icon */}
-        <div className="flex items-center gap-2">
+        {/* Right Section: Logo and Icon */}
+        <div className="flex items-center gap-2 ml-auto">
           <Camera className="h-8 w-8 text-purple-600" />
           <span className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
             HD Studio
           </span>
         </div>
 
-        {/* Right Section: Navigation Links */}
+        {/* Left Section: Navigation Links */}
         <div className="flex items-center gap-8">
           <NavLinks />
         </div>
