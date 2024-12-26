@@ -15,7 +15,6 @@ const NavLinks = () => {
       <Link to="/contact" className={buttonClasses}>Contact Us</Link>
       <Link to="/login" className={commonClasses}>Login</Link>
       <Link to="/register" className={commonClasses}>Register</Link>
-      <Link to="/dashboard" className={commonClasses}>Dashboard</Link>
     </>
   );
 };

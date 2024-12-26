@@ -6,13 +6,22 @@ import {
   Truck, ClipboardList, BarChart2, CheckSquare
 } from 'lucide-react';
 
-// Import all pages
-import {
-  DashboardPage, OrdersPage, ListingsPage, TaskManagerPage,
-  OnsiteTrackingPage, ClientsPage, InvoicesPage, MapSchedulerPage,
-  MergeFleetPage, CalendarViewPage, ShoppingCartPage, TeamPage,
-  MetricsReportsPage, SettingsPage, BillingPage
-} from './DashboardPages';
+// Import all pages individually
+import DashboardPage from './DashboardPage';
+import OrdersPage from './OrdersPage';
+import ListingsPage from './ListingsPage';
+import TaskManagerPage from './TaskManagerPage';
+import OnsiteTrackingPage from './OnsiteTrackingPage';
+import ClientsPage from './ClientsPage';
+import InvoicesPage from './InvoicesPage';
+import MapSchedulerPage from './MapSchedulerPage';
+import MergeFleetPage from './MergeFleetPage';
+import CalendarViewPage from './CalendarViewPage';
+import ShoppingCartPage from './ShoppingCartPage';
+import TeamPage from './TeamPage';
+import MetricsReportsPage from './MetricsReportsPage';
+import SettingsPage from './SettingsPage';
+import BillingPage from './BillingPage';
 
 const ChevronDownIcon = () => <span className="text-gray-500 text-xs"><ChevronDown size={14} /></span>;
 const ChevronUpIcon = () => <span className="text-gray-500 text-xs"><ChevronUp size={14} /></span>;
@@ -68,7 +77,7 @@ const MenuItem = ({ icon: Icon, label, children, isExpanded, onToggle, isActive,
   );
 };
 
-const NavigationSidebar = ({ activePage, setActivePage }) => {
+const NavigationSidebar = ({ activePage, setActivePage, navigate }) => {
   const [expandedItems, setExpandedItems] = useState({
     clients: false,
     invoices: false,
@@ -253,7 +262,7 @@ const NavigationSidebar = ({ activePage, setActivePage }) => {
           <MenuItem
             icon={LogOut}
             label="Logout"
-            onClick={() => console.log('Logout clicked')}
+            onClick={() => { localStorage.removeItem('token'); navigate('/login'); }}
           />
         </div>
         <div className="px-4 pb-4 text-sm text-gray-500">
@@ -275,30 +284,48 @@ const Dashboard = () => {
     }
   }, [navigate]);
 
+  const renderPage = () => {
+    switch (activePage) {
+      case 'Dashboard':
+        return <DashboardPage />;
+      case 'Orders':
+        return <OrdersPage />;
+      case 'Listings':
+        return <ListingsPage />;
+      case 'Task Manager':
+        return <TaskManagerPage />;
+      case 'Onsite Tracking':
+        return <OnsiteTrackingPage />;
+      case 'Clients':
+        return <ClientsPage />;
+      case 'Invoices':
+        return <InvoicesPage />;
+      case 'Map Scheduler':
+        return <MapSchedulerPage />;
+      case 'Merge Fleet':
+        return <MergeFleetPage />;
+      case 'Calendar View':
+        return <CalendarViewPage />;
+      case 'Shopping Cart':
+        return <ShoppingCartPage />;
+      case 'Team':
+        return <TeamPage />;
+      case 'Metrics & Reports':
+        return <MetricsReportsPage />;
+      case 'Settings':
+        return <SettingsPage />;
+      case 'Billing':
+        return <BillingPage />;
+      default:
+        return <DashboardPage />;
+    }
+  };
+
   return (
     <div className="flex h-screen bg-gray-100">
-      <NavigationSidebar activePage={activePage} setActivePage={setActivePage} />
+      <NavigationSidebar activePage={activePage} setActivePage={setActivePage} navigate={navigate} />
       <main className="flex-1 overflow-auto">
-        {(() => {
-          switch (activePage) {
-            case 'Dashboard': return <DashboardPage />;
-            case 'Orders': return <OrdersPage />;
-            case 'Listings': return <ListingsPage />;
-            case 'Task Manager': return <TaskManagerPage />;
-            case 'Onsite Tracking': return <OnsiteTrackingPage />;
-            case 'Clients': return <ClientsPage />;
-            case 'Invoices': return <InvoicesPage />;
-            case 'Map Scheduler': return <MapSchedulerPage />;
-            case 'Merge Fleet': return <MergeFleetPage />;
-            case 'Calendar View': return <CalendarViewPage />;
-            case 'Shopping Cart': return <ShoppingCartPage />;
-            case 'Team': return <TeamPage />;
-            case 'Metrics & Reports': return <MetricsReportsPage />;
-            case 'Settings': return <SettingsPage />;
-            case 'Billing': return <BillingPage />;
-            default: return <DashboardPage />;
-          }
-        })()}
+        {renderPage()}
       </main>
     </div>
   );
