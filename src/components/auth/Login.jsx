@@ -1,15 +1,31 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; // Ensure react-router-dom is installed and configured
+import { Link, useNavigate } from 'react-router-dom'; // Ensure react-router-dom is installed and configured
 import FormField from '../shared/FormField';
+import axios from 'axios';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [message, setMessage] = useState('');
+    const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Handle login logic here (e.g., Firebase authentication)
-        console.log('Logging in with:', { email, password });
+
+        try {
+            const response = await axios.post('http://localhost:5000/api/auth/login', {
+                email,
+                password,
+            });
+            setMessage('Login successful');
+            console.log('Login successful:', response.data);
+            // Save the token to localStorage or context
+            localStorage.setItem('token', response.data.token);
+            navigate('/dashboard'); // Redirect to dashboard
+        } catch (error) {
+            setMessage('Login failed');
+            console.error('Login error:', error);
+        }
     };
 
     return (
@@ -40,6 +56,7 @@ const Login = () => {
                         Login
                     </button>
                 </form>
+                {message && <p>{message}</p>}
 
                 {/* Navigation Links */}
                 <div className="mt-4 text-center">

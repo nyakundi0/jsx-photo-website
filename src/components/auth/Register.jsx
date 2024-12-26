@@ -1,20 +1,35 @@
 // src/components/auth/Register.jsx
 import React, { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import FormField from '../shared/FormField';
 
 const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [message, setMessage] = useState('');
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       alert("Passwords don't match");
       return;
     }
-    // Handle registration logic here (e.g., Firebase authentication)
-    console.log('Registering with:', { email, password });
+
+    try {
+      const response = await axios.post('http://localhost:5000/api/auth/register', {
+        email,
+        password,
+      });
+      setMessage('Registration successful');
+      console.log('Registration successful:', response.data);
+      navigate('/'); // Redirect to home page
+    } catch (error) {
+      setMessage('Registration failed');
+      console.error('Registration error:', error);
+    }
   };
 
   return (
@@ -53,6 +68,7 @@ const Register = () => {
             Register
           </button>
         </form>
+        {message && <p>{message}</p>}
       </div>
     </section>
   );

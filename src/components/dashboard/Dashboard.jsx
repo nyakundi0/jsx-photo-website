@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Home, ShoppingCart, FileText, Users, Calendar, Map,
   Settings, CreditCard, LogOut, ChevronDown, ChevronUp,
@@ -18,10 +19,10 @@ const ChevronUpIcon = () => <span className="text-gray-500 text-xs"><ChevronUp s
 
 const MenuItem = ({ icon: Icon, label, children, isExpanded, onToggle, isActive, onClick }) => {
   const hasChildren = children && children.length > 0;
-  
+
   return (
     <div className="w-full">
-      <div 
+      <div
         className={`flex items-center px-4 py-3 hover:bg-gray-50 cursor-pointer transition-colors duration-150
           ${isActive ? 'bg-blue-50 text-blue-600' : 'text-gray-700'} 
           ${isExpanded ? 'bg-gray-50' : ''}`}
@@ -47,11 +48,11 @@ const MenuItem = ({ icon: Icon, label, children, isExpanded, onToggle, isActive,
           </span>
         )}
       </div>
-      
+
       {hasChildren && isExpanded && (
         <div className="bg-gray-50">
           {children.map((child) => (
-            <div 
+            <div
               key={child.label}
               className={`pl-12 pr-4 py-2 text-sm cursor-pointer transition-colors duration-150
                 ${child.isActive ? 'text-blue-600 bg-blue-50 font-medium' : 'text-gray-600'} 
@@ -98,38 +99,38 @@ const NavigationSidebar = ({ activePage, setActivePage }) => {
 
       <nav className="flex-1 overflow-y-auto">
         <div className="py-2">
-          <MenuItem 
+          <MenuItem
             icon={Home}
-            label="Dashboard" 
+            label="Dashboard"
             isActive={activePage === 'Dashboard'}
             onClick={() => setActivePage('Dashboard')}
           />
-          <MenuItem 
+          <MenuItem
             icon={ShoppingCart}
-            label="Orders" 
+            label="Orders"
             isActive={activePage === 'Orders'}
             onClick={() => setActivePage('Orders')}
           />
-          <MenuItem 
+          <MenuItem
             icon={ClipboardList}
-            label="Listings" 
+            label="Listings"
             isActive={activePage === 'Listings'}
             onClick={() => setActivePage('Listings')}
           />
-          <MenuItem 
+          <MenuItem
             icon={CheckSquare}
-            label="Task Manager" 
+            label="Task Manager"
             isActive={activePage === 'Task Manager'}
             onClick={() => setActivePage('Task Manager')}
           />
-          <MenuItem 
+          <MenuItem
             icon={Truck}
-            label="Onsite Tracking" 
+            label="Onsite Tracking"
             isActive={activePage === 'Onsite Tracking'}
             onClick={() => setActivePage('Onsite Tracking')}
           />
-          
-          <MenuItem 
+
+          <MenuItem
             icon={Users}
             label="Clients"
             isExpanded={expandedItems.clients}
@@ -140,8 +141,8 @@ const NavigationSidebar = ({ activePage, setActivePage }) => {
               createChildItem('Agents', 'Clients')
             ]}
           />
-          
-          <MenuItem 
+
+          <MenuItem
             icon={FileText}
             label="Invoices"
             isExpanded={expandedItems.invoices}
@@ -152,27 +153,27 @@ const NavigationSidebar = ({ activePage, setActivePage }) => {
               createChildItem('Photographers', 'Invoices')
             ]}
           />
-          
-          <MenuItem 
+
+          <MenuItem
             icon={Map}
             label="Map Scheduler"
             isActive={activePage === 'Map Scheduler'}
             onClick={() => setActivePage('Map Scheduler')}
           />
-          <MenuItem 
+          <MenuItem
             icon={Truck}
             label="Merge Fleet"
             isActive={activePage === 'Merge Fleet'}
             onClick={() => setActivePage('Merge Fleet')}
           />
-          <MenuItem 
+          <MenuItem
             icon={Calendar}
             label="Calendar View"
             isActive={activePage === 'Calendar View'}
             onClick={() => setActivePage('Calendar View')}
           />
-          
-          <MenuItem 
+
+          <MenuItem
             icon={ShoppingCart}
             label="Shopping Cart"
             isExpanded={expandedItems.shoppingCart}
@@ -184,8 +185,8 @@ const NavigationSidebar = ({ activePage, setActivePage }) => {
               createChildItem('Questions', 'Shopping Cart')
             ]}
           />
-          
-          <MenuItem 
+
+          <MenuItem
             icon={Users}
             label="Team"
             isExpanded={expandedItems.team}
@@ -198,15 +199,15 @@ const NavigationSidebar = ({ activePage, setActivePage }) => {
               createChildItem('Editors', 'Team')
             ]}
           />
-          
-          <MenuItem 
+
+          <MenuItem
             icon={BarChart2}
             label="Metrics & Reports"
             isActive={activePage === 'Metrics & Reports'}
             onClick={() => setActivePage('Metrics & Reports')}
           />
-          
-          <MenuItem 
+
+          <MenuItem
             icon={Settings}
             label="Settings"
             isExpanded={expandedItems.settings}
@@ -231,8 +232,8 @@ const NavigationSidebar = ({ activePage, setActivePage }) => {
               createChildItem('Webhooks', 'Settings')
             ]}
           />
-          
-          <MenuItem 
+
+          <MenuItem
             icon={CreditCard}
             label="Billing"
             isExpanded={expandedItems.billing}
@@ -246,10 +247,10 @@ const NavigationSidebar = ({ activePage, setActivePage }) => {
           />
         </div>
       </nav>
-      
+
       <div className="mt-auto border-t border-gray-200">
         <div className="p-4">
-          <MenuItem 
+          <MenuItem
             icon={LogOut}
             label="Logout"
             onClick={() => console.log('Logout clicked')}
@@ -265,6 +266,14 @@ const NavigationSidebar = ({ activePage, setActivePage }) => {
 
 const Dashboard = () => {
   const [activePage, setActivePage] = useState('Dashboard');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      navigate('/login'); // Redirect to login if not logged in
+    }
+  }, [navigate]);
 
   return (
     <div className="flex h-screen bg-gray-100">

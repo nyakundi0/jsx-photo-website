@@ -203,7 +203,7 @@ export const ListingsPage = () => (
             <th>Actions</th>
           </tr>
         </thead>
-        
+
       </table>
     </div>
   </PageWrapper>
@@ -261,19 +261,19 @@ export const TaskManagerPage = () => {
   const [assignee, setAssignee] = useState('');
   const [completion, setCompletion] = useState(0);
 
-  const handleStatusChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleStatusChange = (event) => {
     setStatus(event.target.value);
   };
 
-  const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleCategoryChange = (event) => {
     setTaskCategory(event.target.value);
   };
 
-  const handleAssigneeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleAssigneeChange = (event) => {
     setAssignee(event.target.value);
   };
 
-  const handleCompletionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleCompletionChange = (event) => {
     setCompletion(Number(event.target.value));
   };
 
@@ -298,7 +298,7 @@ export const TaskManagerPage = () => {
               <option value="Cancelled">Cancelled</option>
             </select>
           </div>
-          
+
           <div style={styles.filterItem}>
             <label>Task Category:</label>
             <select value={taskCategory} onChange={handleCategoryChange} style={styles.dropdown}>
@@ -343,7 +343,7 @@ export const TaskManagerPage = () => {
                 <button style={styled.button}>Apply</button>
               </td>
             </tr>
-         
+
           </tbody>
         </table>
 
@@ -420,17 +420,17 @@ const styled = {
 export const OnsiteTrackingPage = () => {
   const [serviceArea, setServiceArea] = useState('');
   const [photographers, setPhotographers] = useState('');
-  const [jobStatus, setJobStatus] = useState({
+  const jobStatus = {
     done: 0,
     pendingConfirmation: 0,
     inProgress: 0,
-  });
+  };
 
-  const handleServiceAreaChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleServiceAreaChange = (event) => {
     setServiceArea(event.target.value);
   };
 
-  const handlePhotographersChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handlePhotographersChange = (event) => {
     setPhotographers(event.target.value);
   };
 
@@ -612,19 +612,19 @@ const fleet = {
 
 export const CalendarViewPage = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
-  
+
   // Function to get the start of the month (Sunday)
-  const getFirstDayOfMonth = (year: number, month: number) => {
+  const getFirstDayOfMonth = (year, month) => {
     return new Date(year, month, 1).getDay();
   };
 
   // Function to get the total days in the month
-  const getDaysInMonth = (year: number, month: number) => {
+  const getDaysInMonth = (year, month) => {
     return new Date(year, month + 1, 0).getDate();
   };
 
   // Function to generate the calendar grid
-  const generateCalendar = (year: number, month: number) => {
+  const generateCalendar = (year, month) => {
     const firstDay = getFirstDayOfMonth(year, month);
     const daysInMonth = getDaysInMonth(year, month);
 
@@ -663,7 +663,7 @@ export const CalendarViewPage = () => {
   };
 
   const months = [
-    'January', 'February', 'March', 'April', 'May', 'June', 
+    'January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December'
   ];
 
@@ -675,7 +675,7 @@ export const CalendarViewPage = () => {
     <PageWrapper title="Calendar View">
       <div style={calendar.container}>
         <h2>{months[currentMonth]} {currentYear}</h2>
-        
+
         {/* Calendar Table */}
         <table style={calendar.table}>
           <thead>
@@ -771,7 +771,7 @@ export const MetricsReportsPage = () => (
       <div style={metrics.timestamp}>
         Data current as of 09:04 AM, Dec 21, 2024
       </div>
-      
+
       {/* Monthly Report */}
       <div style={metrics.monthContainer}>
         <h2>Dec 2024</h2>
